@@ -1,0 +1,202 @@
+:root {
+  --darkish: #492957;
+  --lighter: #0d41c0;
+  --highlighter: #8900f2;
+  --toobright: #faa709;
+  --prple-grad: linear-gradient(0deg, hsla(282, 36%, 25%, 1) 0%, hsla(310, 22%, 37%, 1) 100%);
+  --blueish-grad: linear-gradient(45deg, hsl(228.32deg 78.01% 37.45%) 0%, hsl(301.79deg 89.33% 14.71%) 100%);
+  --card-grad: linear-gradient(298deg, hsl(320.24deg 96.85% 50.2%) 0%, hsl(42.4deg 95.28% 49.8%) 100%);
+  --header-font: 'Unbounded', Arial, sans-serif;
+  --code-font: 'Space Mono', monospace;
+  --font-body: 'Lato', verdana, sans-serif;
+}
+
+/* Google Fonts */
+
+/* font-family: 'Lato', sans-serif;
+font-family: 'Space Mono', monospace;
+font-family: 'Unbounded', cursive; */
+
+/*Set Content select */
+::selection {
+  background-color: #4cc9f0;
+  color: var(--darkish);
+}
+
+html {
+  /* set 1rem to 10px instead of native 16px to make it easier to calculate font-size values for the rest of the page (e.g. 1.6rem is 16px, 2.0rem is 20px, etc.) */
+  font-size: 1em;
+}
+
+body {
+  background: var(--blueish-grad);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.625rem;
+  color: var(--toobright);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1 {
+  /* 4rem = 40px (4 * 10px) */
+  font-size: 4rem;
+  font-family: var(--header-font);
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-family: var(--font-body);
+  text-align: center;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 0.2rem;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+
+}
+
+
+header {
+  width: 96%;
+  margin: 0 auto;
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--toobright);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* using a mobile-first approach, set base column width to be 100% and we'll update it using media queries for larger screen sizes */
+.card-column {
+  flex: 1 0 100%;
+  padding: 1.5rem;
+  /* when the screen resizes, make it so our columns don't jump in size */
+  transition: flex-basis 500ms linear;
+  margin-bottom: 5rem;
+}
+
+.code-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding: 2rem;
+  color: #fff;
+
+  /* outline is like border, but on the outside of the box instead of inside */
+  outline: 2px dashed var(--toobright);
+  outline-offset: -2px;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.code-card .card-header {
+  /* use position and negative margins to move title of card over the card's outline and create an overlap effect */
+  position: relative;
+  margin: -4rem 0 1.5rem 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--highlighter);
+  color: var(--toobright);
+  border: 2px solid var(--toobright);
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+
+/* set an outer and inner drop shadow on the card to create a glowing effect on hover */
+.code-card:hover,
+.code-card:hover .card-header {
+  box-shadow: inset 0px 0px 8px #fff, 0 0 15px #b9faf8;
+}
+
+/* each card's code block grows to the height of the largest code block on the page, making each card even in height */
+.code-card .code-block {
+  flex-grow: 1;
+  display: flex;
+}
+
+.code-card pre {
+  /* set styles to make it so code wraps in <pre> instead of overflowing */
+  white-space: pre-wrap;
+  overflow: auto;
+  tab-size: 4;
+  padding: 1.2rem 1rem;
+  color: var(--darkish);
+  border-radius: 8px;
+  /* use linear-gradient() function to create a fading background  */
+  background-image: var(--card-grad);
+  display: flex;
+  align-items: center;
+}
+
+/* on <pre> click, select all contents so the code is highlighted */
+.code-card pre:active {
+  user-select: all;
+}
+
+pre.code-block>code {
+  font-family: var(--code-font);
+}
+
+@media screen and (min-width: 768px) {
+
+  /* these are the rules applied when on a tablet sized screen */
+  .card-column {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  /* select the last child to grow full width IF it has space to grow */
+  .card-column:last-child {
+    flex-grow: 1;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+
+  /* This is the media query for larger screens */
+  header {
+    width: 75%;
+  }
+
+  .card-column {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+}
