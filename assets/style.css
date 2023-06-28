@@ -172,12 +172,13 @@ pre.code-block>code {
   font-family: var(--code-font);
 }
 
+
 @media screen and (min-width: 768px) {
 
   /* these are the rules applied when on a tablet sized screen */
   .card-column {
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 40%;
   }
 
   /* select the last child to grow full width IF it has space to grow */
